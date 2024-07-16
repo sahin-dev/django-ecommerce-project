@@ -1,13 +1,20 @@
 {%load static%}
 
+
+
+
+
+
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
 
-
+<!-- Mirrored from nest-frontend-v6.netlify.app/index-3 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Jul 2024 17:42:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8" />
-    <title>Nest - A mordern food website</title>
+    <title>Nest - Multipurpose eCommerce HTML Template</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,53 +25,11 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
     <!-- Template CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.min.css' %}" />
-    <link rel="stylesheet" href="{%  static 'assets/css/main5103.css'        %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/slider-range.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/main5103.css' %}" />
 </head>
 
 <body>
-    <!-- Modal -->
-    <div class="modal fade custom-modal" id="onloadModal" tabindex="-1" aria-labelledby="onloadModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-body">
-                    <div class="deal" style="background-image: url('assets/imgs/banner/popup-1.png')">
-                        <div class="deal-top">
-                            <h6 class="mb-10 text-brand-2">Deal of the Day</h6>
-                        </div>
-                        <div class="deal-content detail-info">
-                            <h4 class="product-title"><a class='text-heading' href='shop-product-right.html'>Organic fruit for your family's health</a></h4>
-                            <div class="clearfix product-price-cover">
-                                <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand">$38</span>
-                                    <span>
-                                        <span class="save-price font-md color3 ml-15">26% Off</span>
-                                        <span class="old-price font-md ml-15">$52</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="deal-bottom">
-                            <p class="mb-20">Hurry Up! Offer End In:</p>
-                            <div class="deals-countdown pl-5" data-countdown="2025/03/25 00:00:00">
-                                <span class="countdown-section"><span class="countdown-amount hover-up">03</span><span class="countdown-period"> days </span></span><span class="countdown-section"><span class="countdown-amount hover-up">02</span><span class="countdown-period"> hours </span></span><span class="countdown-section"><span class="countdown-amount hover-up">43</span><span class="countdown-period"> mins </span></span><span class="countdown-section"><span class="countdown-amount hover-up">29</span><span class="countdown-period"> sec </span></span>
-                            </div>
-                            <div class="product-detail-rating">
-                                <div class="product-rate-cover text-end">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (32 rates)</span>
-                                </div>
-                            </div>
-                            <a class='btn hover-up' href='shop-grid-right.html'>Shop Now <i class="fi-rs-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Quick view -->
     <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -188,7 +153,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li>Stuck?!Chill Call Us: <strong class="text-brand"> +017-XXXXXXXXX </strong></li>
+                                <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
                                 <li>
                                     <a class="language-dropdown-active" href="#">English <i class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
@@ -227,7 +192,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href='index.html'><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"  /></a>
+                        <a href='index.html'><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo" /></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -335,24 +300,12 @@
                                     <a href='page-account.html'><span class="lable ml-0">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
-                                            <li>
-                                                <a href='page-account.html'><i class="fi fi-rs-user mr-10"></i>My Account</a>
-                                            </li>
-                                            <li>
-                                                <a href='page-account.html'><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href='page-account.html'><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
-                                            </li>
-                                            <li>
-                                                <a href='shop-wishlist.html'><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href='page-account.html'><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
-                                            </li>
-                                            <li>
-                                                <a href='page-login.html'><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
-                                            </li>
+                                            <li><a href='page-account.html'><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
+                                            <li><a href='page-account.html'><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a></li>
+                                            <li><a href='page-account.html'><i class="fi fi-rs-label mr-10"></i>My Voucher</a></li>
+                                            <li><a href='shop-wishlist.html'><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a></li>
+                                            <li><a href='page-account.html'><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
+                                            <li><a href='page-login.html'><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -466,7 +419,7 @@
                                                     <li><a href='shop-product-right.html'>Product – Right Sidebar</a></li>
                                                     <li><a href='shop-product-left.html'>Product – Left Sidebar</a></li>
                                                     <li><a href='shop-product-full.html'>Product – No sidebar</a></li>
-                                                    <li><a href='shop-product-vendor.html'>Product – Vendor Info</a></li>
+                                                    <li><a href='shop-product-vendor.html'>Product – Vendor Infor</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href='shop-filter.html'>Shop – Filter</a></li>
@@ -602,7 +555,7 @@
                     </div>
                     <div class="hotline d-none d-lg-flex">
                         <img src="{% static 'assets/imgs/theme/icons/icon-headphone.svg' %}" alt="hotline" />
-                        <p>+880 - XXXXXXXXX<span>24/7 Support Center</span></p>
+                        <p>1900 - 888<span>24/7 Support Center</span></p>
                     </div>
                     <div class="header-action-icon-2 d-block d-lg-none">
                         <div class="burger-icon burger-icon-white">
@@ -620,7 +573,7 @@
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="#">
+                                <a class='mini-cart-icon' href='shop-cart.html'>
                                     <img alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
                                     <span class="pro-count white">2</span>
                                 </a>
@@ -850,19 +803,13 @@
             </div>
         </div>
     </div>
-
-
-    {% block content %}
-
-
-   
-
-
-    {% endblock content %}
     
+    {% block content%}
+
+    {% endblock content%}
 
     <footer class="main">
-        <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
+        <section class="newsletter mb-15">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -888,7 +835,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 mb-md-4 mb-xl-0">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay="0">
+                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
                                 <img src="{% static 'assets/imgs/theme/icons/icon-1.svg' %}" alt="" />
                             </div>
@@ -899,7 +846,7 @@
                         </div>
                     </div>
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
                                 <img src="{% static 'assets/imgs/theme/icons/icon-2.svg' %}" alt="" />
                             </div>
@@ -910,7 +857,7 @@
                         </div>
                     </div>
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
                                 <img src="{% static 'assets/imgs/theme/icons/icon-3.svg' %}" alt="" />
                             </div>
@@ -921,7 +868,7 @@
                         </div>
                     </div>
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
+                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
                                 <img src="{% static 'assets/imgs/theme/icons/icon-4.svg' %}" alt="" />
                             </div>
@@ -932,7 +879,7 @@
                         </div>
                     </div>
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
+                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
                                 <img src="{% static 'assets/imgs/theme/icons/icon-5.svg' %}" alt="" />
                             </div>
@@ -943,7 +890,7 @@
                         </div>
                     </div>
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-xl-none">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".5s">
+                        <div class="banner-left-icon d-flex align-items-center wow fadeIn animated">
                             <div class="banner-icon">
                                 <img src="{% static 'assets/imgs/theme/icons/icon-6.svg' %}" alt="" />
                             </div>
@@ -960,7 +907,7 @@
             <div class="container pt-15 pb-20">
                 <div class="row">
                     <div class="col">
-                        <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
+                        <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
                             <div class="logo mb-30">
                                 <a class='mb-15' href='index.html'><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo" /></a>
                                 <p class="font-lg text-heading">Awesome grocery store website template</p>
@@ -973,8 +920,8 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".1s>
-                        <h4 class=" widget-title">Company</h4>
+                    <div class="footer-link-widget col">
+                        <h4 class="widget-title">Company</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="#">About Us</a></li>
                             <li><a href="#">Delivery Information</a></li>
@@ -985,7 +932,7 @@
                             <li><a href="#">Careers</a></li>
                         </ul>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                    <div class="footer-link-widget col">
                         <h4 class="widget-title">Account</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="#">Sign In</a></li>
@@ -997,7 +944,7 @@
                             <li><a href="#">Compare products</a></li>
                         </ul>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
+                    <div class="footer-link-widget col">
                         <h4 class="widget-title">Corporate</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="#">Become a Vendor</a></li>
@@ -1009,7 +956,7 @@
                             <li><a href="#">Promotions</a></li>
                         </ul>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
+                    <div class="footer-link-widget col">
                         <h4 class="widget-title">Popular</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="#">Milk & Flavoured Milk</a></li>
@@ -1021,19 +968,20 @@
                             <li><a href="#">Cheese</a></li>
                         </ul>
                     </div>
-                    <div class="footer-link-widget widget-install-app col wow animate__animated animate__fadeInUp" data-wow-delay=".5s">
+                    <div class="footer-link-widget widget-install-app col">
                         <h4 class="widget-title">Install App</h4>
-                        <p class="">From App Store or Google Play</p>
+                        <p class="wow fadeIn animated">From App Store or Google Play</p>
                         <div class="download-app">
                             <a href="#" class="hover-up mb-sm-2 mb-lg-0"><img class="active" src="{% static 'assets/imgs/theme/app-store.jpg' %}" alt="" /></a>
                             <a href="#" class="hover-up mb-sm-2"><img src="{% static 'assets/imgs/theme/google-play.jpg' %}" alt="" /></a>
                         </div>
                         <p class="mb-20">Secured Payment Gateways</p>
-                        <img class="" src="{% static 'assets/imgs/theme/payment-method.png' %}" alt="" />
+                        <img class="wow fadeIn animated" src="{% static 'assets/imgs/theme/payment-method.png' %}" alt="" />
                     </div>
                 </div>
+            </div>
         </section>
-        <div class="container pb-30 wow animate__animated animate__fadeInUp" data-wow-delay="0">
+        <div class="container pb-30">
             <div class="row align-items-center">
                 <div class="col-12 mb-30">
                     <div class="footer-bottom"></div>
@@ -1044,11 +992,11 @@
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
                         <img src="{% static 'assets/imgs/theme/icons/phone-call.svg' %}" alt="hotline" />
-                        <p>+880 - XXXXXXXXX<span>Working 8:00 - 22:00</span></p>
+                        <p>1900 - 6666<span>Working 8:00 - 22:00</span></p>
                     </div>
                     <div class="hotline d-lg-inline-flex">
                         <img src="{% static 'assets/imgs/theme/icons/phone-call.svg' %}" alt="hotline" />
-                        <p>+880 - XXXXXXXXX<span>24/7 Support Center</span></p>
+                        <p>1900 - 8888<span>24/7 Support Center</span></p>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
@@ -1066,7 +1014,7 @@
         </div>
     </footer>
     <!-- Preloader Start -->
-     <!-- <div id="preloader-active">
+    <!-- <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
@@ -1074,7 +1022,7 @@
                 </div>
             </div>
         </div>
-    </div>  -->
+    </div> -->
     <!-- Vendor JS-->
     <script src="{% static 'assets/js/vendor/modernizr-3.6.0.min.js' %}"></script>
     <script src="{% static 'assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
@@ -1082,11 +1030,12 @@
     <script src="{% static 'assets/js/vendor/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/slick.js' %}"></script>
     <script src="{% static 'assets/js/plugins/jquery.syotimer.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugins/waypoints.js' %}"></script>
     <script src="{% static 'assets/js/plugins/wow.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/slider-range.js' %}"></script>
     <script src="{% static 'assets/js/plugins/perfect-scrollbar.js' %}"></script>
     <script src="{% static 'assets/js/plugins/magnific-popup.js' %}"></script>
     <script src="{% static 'assets/js/plugins/select2.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/waypoints.js' %}"></script>
     <script src="{% static 'assets/js/plugins/counterup.js' %}"></script>
     <script src="{% static 'assets/js/plugins/jquery.countdown.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/images-loaded.js' %}"></script>
@@ -1099,4 +1048,6 @@
     <script src="{% static 'assets/js/main5103.js' %}"></script>
     <script src="{% static 'assets/js/shop5103.js' %}"></script>
 </body>
+
+
 </html>
