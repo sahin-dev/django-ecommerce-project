@@ -642,6 +642,7 @@
             wrapper4.removeClass("mobile-menu-active");
         });
     }
+    
     mobileHeaderActive();
 
     /*---------------------

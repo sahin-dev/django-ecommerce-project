@@ -261,7 +261,7 @@ input[type=number]:focus,
 }
 
 .text-brand {
-  color: #883bb7 !important;
+  color: rgb(6, 183, 112); !important;
 }
 
 .text-brand-2 {
@@ -1317,6 +1317,108 @@ label {
 .custome-checkbox input[type=checkbox]:checked + .form-check-label::after {
   opacity: 1;
 }
+/*********
+/* Custom checkbox styling */
+/* Custom checkbox styling */
+/* Custom checkbox styling */
+.custom-checkbox {
+  position: relative;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  width: 15px;  /* Smaller size */
+  height: 15px; /* Smaller size */
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.custom-checkbox:checked {
+  background-color: #001861;
+  border: 1px solid #001861;
+}
+
+.custom-checkbox:checked:after {
+  content: '\2713';
+  font-size: 14px; /* Adjust font size to fit smaller checkbox */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+}
+
+.custom-check {
+  color: rgb(14, 253, 14); /* Change the color */
+  font-size: 24px; /* Change the size */
+  font-weight: bold; /* Make it bold */
+  vertical-align: middle; /* Align it vertically if needed */
+  /* Add any other custom styles here */
+}
+/* Ensuring all elements use border-box */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Adjusting styles for better UI consistency */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(6, 183, 112);;
+  font-size: 16px;
+}
+
+a img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+a:hover {
+  color: #001861;
+}
+
+.more-less-button {
+  cursor: pointer;
+  color: #001861;
+  font-size: 16px;
+  margin-top: 10px;
+  display: block;
+}
+
+
+
+
+
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+
 
 .divider-text-center {
   text-align: center;
@@ -1482,7 +1584,7 @@ label {
   padding: 12px 25px;
 }
 
-.search-form form {
+/* .search-form form {
   position: relative;
 }
 .search-form form input {
@@ -1502,7 +1604,55 @@ label {
 }
 .search-form form button:hover {
   color: #fff;
+} */
+.search-form {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
+
+.search-form select {
+  margin-right: 10px;
+}
+
+.search-form input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 8px;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  flex: 1;
+}
+
+.search-form input::-webkit-search-decoration,
+.search-form input::-webkit-search-cancel-button,
+.search-form input::-webkit-search-results-button,
+.search-form input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.search-form button {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust this value as needed */
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  color: #242424;
+  font-size: 20px;
+  padding: 0 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.search-form button:hover {
+  color: #fff;
+}
+
+
 
 input.qty-val {
   border: 0;
@@ -4336,6 +4486,10 @@ table .product-thumbnail img {
 .button.button-add-to-cart {
   padding: 8px 40px;
 }
+.button-add-to-cart[disabled] {
+  opacity: 0.5; /* Make it visually distinct */
+  pointer-events: none; /* Ensure it's not clickable */
+}
 
 .product-extra-link2 a {
   background: #fff none repeat scroll 0 0;
@@ -4386,7 +4540,7 @@ table .product-thumbnail img {
 }
 
 .tab-style3 .nav-tabs .nav-item a.active, .tab-style3 .nav-tabs .nav-item a:hover {
-  color: #001861;
+  color: #E90074;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
 }
 .tab-style3 .nav-tabs li.nav-item a {
@@ -4400,7 +4554,7 @@ table .product-thumbnail img {
   border-radius: 30px;
   border: 1px solid #ececec;
   background: #fff;
-  color: #34568b;
+  color: #001861;
 }
 
 .tab-content.shop_info_tab {
@@ -4520,7 +4674,7 @@ table .product-thumbnail img {
 }
 
 .progress-bar {
-  background-color: #001861;
+  background-color: #089e99;
 }
 
 .shop-filter-toogle {
@@ -5610,6 +5764,8 @@ h6.post-title {
   width: 30px;
 }
 
+
+
 /*Responsive*/
 @media only screen and (max-width: 992px) {
   .invoice .invoice-header {
@@ -5944,8 +6100,8 @@ h6.post-title {
 }
 .header-action-2 .header-action-icon-2 > a span.pro-count {
   position: absolute;
-  right: -11px;
-  top: -5px;
+  right: -2px;
+  top: -2px;
   color: #ffffff;
   height: 20px;
   width: 20px;
@@ -5955,6 +6111,7 @@ h6.post-title {
   text-align: center;
   line-height: 20px;
 }
+
 
 .cart-dropdown-wrap ul li {
   display: flex;
@@ -6523,7 +6680,7 @@ h6.post-title {
 
 .burger-icon.burger-icon-white > span::before,
 .burger-icon.burger-icon-white > span::after {
-  background-color: #253D4E;
+  background-color: #36C2CE;
 }
 
 .body-overlay-1 {
@@ -6766,7 +6923,7 @@ h6.post-title {
   font-weight: 500;
   font-size: 12px;
   font-family: "Lato", sans-serif;
-  color: #fae8e0;
+  color: #55bb90;
   display: block;
   letter-spacing: 0.9px;
 }
@@ -6898,7 +7055,7 @@ h6.post-title {
 .header-style-1 .main-categori-wrap > a {
   color: #fff;
   line-height: 70px;
-  background: #FF0000;
+  background: #E90074;
   padding: 0 30px;
 }
 .header-style-1 .main-categori-wrap > a i.up {
@@ -9540,6 +9697,8 @@ footer .hotline img {
   margin-right: 200px !important;
 }
 
+
+
 @media only screen and (max-width: 768px) {
   .totall-product h2 {
     font-size: 28px;
@@ -10603,6 +10762,7 @@ footer .hotline img {
     display: block;
   }
 }
+
 /*phone landscape*/
 @media only screen and (min-width: 480px) and (max-width: 667px) {
   .header-height-2 {

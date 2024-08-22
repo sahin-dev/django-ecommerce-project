@@ -1,7 +1,7 @@
 
 {% extends 'partials/base.html'  %}
-{%load static%}
-{%block content%}
+{% load static %}
+{% block content %}
 
 
 
@@ -75,29 +75,31 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                                 <div class="row product-grid-4">
+
+                                    {% for p in products %}
                                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-1-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-1-2.jpg' %}" alt="" />
+                                                    <a href="{% url 'core:product-detail' p.pid %}">
+                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
+                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
                                                     <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
                                                     <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                    <a href="{% url 'core:product-detail' p.pid %}" class="action-btn"  ><i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">Hot</span>
+                                                    <span class="hot">-{{ p.get_percentage|floatformat:0 }}%</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Snack</a>
+                                                    <a href="{% url 'core:category-product-list' p.category.cid %}">{{ p.category.title }}</a>
                                                 </div>
-                                                <h2><a href='shop-product-right.html'>Seeds of Change Organic Quinoe</a></h2>
+                                                <h2><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h2>
                                                 <div class="product-rate-cover">
                                                     <div class="product-rate d-inline-block">
                                                         <div class="product-rating" style="width: 90%"></div>
@@ -105,414 +107,39 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{ p.vendor.title }}</a></span>
                                                 </div>
+
+
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
-                                                        <span>$28.85</span>
-                                                        <span class="old-price">$32.8</span>
+                                                        <span>৳</span><span class="current-product-price-{{p.id}}" >{{ p.price }}</span>
+                                                        <span class="old-price">৳{{ p.old_price }}</span>
                                                     </div>
                                                     <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+
+                                                        <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.id  }}"  >
+                                                        <input type="hidden" value="{{p.pid}}"  class="product-pid-{{ p.id  }}"  >
+                                                        <input type="hidden" value="{{p.image.url}}"  class="product-image-{{ p.id  }}"  >
+                                                        <input type="hidden" value="{{p.title}}"  class="product-title-{{ p.id  }}"  >
+                                                        <input type="hidden" value="{{p.id}}"  class="product-id-{{ p.id  }}"  >
+                                                        <div class="d-flex">
+
+                                                        
+
+                                                            <button class='add add-to-cart-btn' data-index="{{p.id}}" style="border: none;" id="add-to-cart-btn"><i class="fi-rs-shopping-cart mr-5"></i>Add </button>
+                                                            <button class='add-to-wishlist' data-product-item="{{p.id}}" style="border: none; background: none;" id="add-to-cart-btn"><i class="fi-rs-heart" style="fill: aqua;"></i></button>
+                                                        </div>
                                                     </div>
+
                                                 </div>
+
+                                                
                                             </div>
                                         </div>
                                     </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-2-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-2-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="sale">Sale</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Hodo Foods</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>All Natural Italian-Style Chicken Meatballs</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 80%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (3.5)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>Stouffer</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$52.85</span>
-                                                        <span class="old-price">$55.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-3-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-3-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="new">New</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Snack</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Angie’s Boomchickapop Sweet & Salty</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 85%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>StarKist</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$48.85</span>
-                                                        <span class="old-price">$52.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-4-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-4-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Vegetables</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Foster Farms Takeout Crispy Classic</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$17.85</span>
-                                                        <span class="old-price">$19.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-5-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-5-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="best">-14%</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Pet Foods</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Blue Diamond Almonds Lightly</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$23.85</span>
-                                                        <span class="old-price">$25.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-6-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-6-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Hodo Foods</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Chobani Complete Vanilla Greek</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$54.85</span>
-                                                        <span class="old-price">$55.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-7-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-7-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Meats</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Canada Dry Ginger Ale – 2 L Bottle</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$32.85</span>
-                                                        <span class="old-price">$33.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-8-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-8-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="sale">Sale</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Snack</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Encore Seafoods Stuffed Alaskan</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$35.85</span>
-                                                        <span class="old-price">$37.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-9-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-9-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">Hot</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Coffes</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Gorton’s Beer Battered Fish Fillets</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>Old El Paso</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$23.85</span>
-                                                        <span class="old-price">$25.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
-                                        <div class="product-cart-wrap">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href='shop-product-right.html'>
-                                                        <img class="default-img" src="{% static 'assets/imgs/shop/product-10-1.jpg' %}" alt="" />
-                                                        <img class="hover-img" src="{% static 'assets/imgs/shop/product-10-2.jpg' %}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href='shop-grid-right.html'>Cream</a>
-                                                </div>
-                                                <h2><a href='shop-product-right.html'>Haagen-Dazs Caramel Cone Ice Cream</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 50%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> (2.0)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>Tyson</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>$22.85</span>
-                                                        <span class="old-price">$24.8</span>
-                                                    </div>
-                                                    <div class="add-cart">
-                                                        <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end product card-->
+                                    {% endfor %}
+                                    
                                 </div>
                                 <!--End product-grid-4-->
                             </div>
@@ -549,7 +176,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -681,7 +308,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -726,7 +353,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -768,7 +395,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -810,7 +437,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -855,7 +482,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -993,7 +620,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1125,7 +752,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1170,7 +797,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1212,7 +839,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1254,7 +881,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1299,7 +926,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1437,7 +1064,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1569,7 +1196,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1614,7 +1241,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1656,7 +1283,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1698,7 +1325,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1743,7 +1370,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -1881,7 +1508,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2013,7 +1640,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2058,7 +1685,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2100,7 +1727,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2142,7 +1769,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2187,7 +1814,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2325,7 +1952,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2457,7 +2084,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2502,7 +2129,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2544,7 +2171,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2586,7 +2213,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2631,7 +2258,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2769,7 +2396,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2901,7 +2528,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2946,7 +2573,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -2988,7 +2615,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -3030,7 +2657,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -3075,7 +2702,7 @@
                                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
                                                 <div>
-                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                    <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
@@ -3216,7 +2843,7 @@
                                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                                             </div>
                                             <div>
-                                                <span class="font-small text-muted">By <a href='vendor-details-1.html'>NestFood</a></span>
+                                                <span class="font-small text-muted">By <a href='vendor-details-1.html'>DailyDelightFood</a></span>
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
@@ -3386,27 +3013,19 @@
                 </div>
                 <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
                     <div class="sidebar-widget widget-category-2 mb-30">
-                        <h5 class="section-title style-1 mb-30">Category</h5>
+                        <h5 class="section-title style-1 mb-30">Top Categories</h5>
                         <ul>
-                            <li>
-                                <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="" />Milks & Dairies</a><span class="count">30</span>
-                            </li>
-                            <li>
-                                <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt="" />Clothing</a><span class="count">35</span>
-                            </li>
-                            <li>
-                                <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt="" />Pet Foods </a><span class="count">42</span>
-                            </li>
-                            <li>
-                                <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt="" />Baking material</a><span class="count">68</span>
-                            </li>
-                            <li>
-                                <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt="" />Fresh Fruit</a><span class="count">87</span>
-                            </li>
+                            {% for c in categories|slice:":6" %}
+                                <li>
+                                    <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{ c.image.url}}" alt="" />{{ c.title }}</a><span class="count">{{ c.category.count }}</span>
+                                </li>
+                            {% endfor %}
+                            
+
                         </ul>
                     </div>
                     <!-- Fillter By Price -->
-                    <div class="sidebar-widget price_range range mb-30">
+                    <!-- <div class="sidebar-widget price_range range mb-30">
                         <h5 class="section-title style-1 mb-30">Fill by price</h5>
                         <div class="price-filter">
                             <div class="price-filter-inner">
@@ -3444,7 +3063,9 @@
                             </div>
                         </div>
                         <a class='btn btn-sm btn-default' href='shop-grid-right.html'><i class="fi-rs-filter mr-5"></i> Fillter</a>
-                    </div>
+                    </div> -->
+
+
                     <!-- Product sidebar Widget -->
                     <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
                         <h5 class="section-title style-1 mb-30">New products</h5>

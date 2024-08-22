@@ -3,6 +3,7 @@ from userauths.forms import UserRegisterForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.conf import settings
+from userauths.models import User
 from django.contrib.auth import get_user_model
 
 
@@ -32,7 +33,7 @@ def register_view(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        messages.warning(request, f"Hey you're alreasy Logged In.")
+        messages.warning(request, f"Hey you're alreasy Logged In.!")
         return redirect("core:index")
     
     if request.method == "POST":
@@ -41,22 +42,22 @@ def login_view(request):
 
         try:
             user = User.objects.get(email=email)
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "You are logged in.!")
+                return redirect("core:index")
+            else:
+                messages.warning(request, "Uername or Password Incorrect Try again!! ")
+
         except User.DoesNotExist:
-            messages.warning(request, f"User with email {email} doesn't exist.")
-            return render(request, "userauths/sign-in.html")
+            messages.warning(request, f"User with email {email} doesn't exist.!")
+            
 
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "You are logged in.")
-            return redirect("core:index")
-        else:
-            messages.warning(request, "User Doestn't exist, creat an account. ")
+        
     
-    context = {
-
-    }
-    return render(request, "userauths/sign-in.html", context)
+  
+    return render(request, "userauths/sign-in.html")
 
 
 def logout_view(request):
