@@ -97,3 +97,30 @@
     });
 
 })(jQuery);
+function showMore() {
+    
+    const hiddenItems = Array.from(document.querySelectorAll('.category-item')).filter(item => {
+        return getComputedStyle(item).display === 'none';
+    });
+    const button = document.querySelector('.more-less-button');
+    
+    let shownCount = 0;
+    hiddenItems.forEach(item => {
+        if (shownCount < 10) {
+            item.style.display = 'flex';
+            shownCount++;
+        }
+    });
+    
+    // Hide the "Show More" button if there are no more hidden items
+    if (hiddenItems.length <= shownCount) {
+        button.style.display = 'none';
+    } else {
+        button.textContent = 'Show Less';
+    }
+}
+document.getElementById('add-to-cart-btn').addEventListener('click', function(event) {
+    if (this.disabled) {
+        event.preventDefault();
+    }
+});

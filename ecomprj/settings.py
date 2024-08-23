@@ -39,9 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    ###third party
+    'taggit',
+    'ckeditor',
     #custom apps
     'core',
     'userauths',
+    #payment integration
+    'paypal.standard.ipn',
+    'bkash',
+    'bKash_payment',
+
 ]
 
 
@@ -65,6 +73,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'core.context_processor.default',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -140,5 +149,36 @@ JAZZMIN_SETTINGS = {
     'site_logo' : "assets/imgs/theme/loading.gif",
     'copyright' : "nafisshop.com",
 }
+LOGIN_URL = "userauths:sign-in"
 
 AUTH_USER_MODEL = 'userauths.User'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default' : {
+        'skin' : 'moono',
+        'codeSnippet_theme': 'monokai',
+        'toolbar': 'all',
+        'extraPlugins': ','.join(
+            [
+                'codesnippet',
+                'widget',
+                'dialog'
+            ]
+
+        ),
+
+
+    }
+}
+
+BKASH = {
+    'app_key': 'your_app_key',
+    'app_secret': 'your_app_secret',
+    'username': 'your_username',
+    'password': 'your_password',
+    'sandbox': True  # Set to False for production
+}
+
+PAYPAL_RECEIVER_EMAIL = 'desphixbuisness.paypal.com'
+PAYPAL_TEST = True
