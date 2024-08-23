@@ -1,7 +1,9 @@
 from django.urls import path
-from core.views import index
+from core.views import index,payment
 
 app_name = "core"
+
 urlpatterns = [
-    path("", index)
+    path("", index,name="index"),
+    path("payment/", payment,name='payment')
 ]
