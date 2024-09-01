@@ -2,6 +2,7 @@ from sslcommerz_lib import SSLCOMMERZ
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404,redirect
 from core.models import Product, Category, Vendor, ProductImages,CartOrderItems, CartOrder,ProductReview, wishlist_model, Address
+from userauths.models import User
 from taggit.models import Tag
 from django.db.models import Count,Avg
 from core.forms import ProductReviewForm
@@ -18,19 +19,21 @@ from django.core import serializers
 
 def index(request):
     #products = Product.objects.all().order_by("-id")
-    products = Product.objects.filter(product_status = "published", featured = True ).order_by('-date')
-
-
+    products = Product.objects.filter(product_status = "published" ).order_by('-date')
+    for product in products:
+        print(product)
+    
+    categories = Category.objects.all()
     context = {
-        "products" : products
-
-
+        "products" : products,
+        "categories":categories
 
     }
     return render(request, 'core/index.html', context)
 
 def product_list_view(request):
     products = Product.objects.filter(product_status = "published" )
+    print(products)
     context = {
         "products" : products
     }
@@ -42,11 +45,12 @@ def product_list_view(request):
 def payment(request):
     settings = { 'store_id': 'testbox', 'store_pass': 'qwerty', 'issandbox': True }
     sslcommez = SSLCOMMERZ(settings)
+
     post_body = {}
     post_body['total_amount'] = 100.26
     post_body['currency'] = "BDT"
     post_body['tran_id'] = "12345"
-    post_body['success_url'] = "your success url"
+    post_body['success_url'] = "http://127.0.0.1:8000/invoice/"
     post_body['fail_url'] = "your fail url"
     post_body['cancel_url'] = "your cancel url"
     post_body['emi_option'] = 0
@@ -65,8 +69,8 @@ def payment(request):
 
 
     response = sslcommez.createSession(post_body)
-    print(response)
-    return HttpResponseRedirect(response['redirectGatewayURL'])
+    
+    return HttpResponseRedirect(response['GatewayPageURL'],)
 # Create your views here.
 def category_list_view(request):
 
@@ -261,9 +265,6 @@ def filter_product(request):
 
     context = {
         "products": products,
-      
-        
-
     }
 
     data = render_to_string("core/async/product-list.html", context)
@@ -280,7 +281,6 @@ def add_to_cart(request):
         "image" : request.GET['image'],
         "pid" : request.GET['pid'],
 
-          
     }
     
     if "cart_data_obj" in request.session:
@@ -293,7 +293,6 @@ def add_to_cart(request):
         else:
             cart_data = request.session['cart_data_obj']
             cart_data.update(cart_product)
-
             request.session['cart_data_obj'] = cart_data
 
 
@@ -310,7 +309,6 @@ def cart_view(request):
     if 'cart_data_obj' in request.session:
         for p_id ,item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
-
 
 
         return render(request, 'core/cart.html',{"cart_data": request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
@@ -376,17 +374,18 @@ def checkout_view(request):
             'return_url' : 'http://{}{}'.format(host,reverse("core:payment-completed")),
             'cancel_url' : 'http://{}{}'.format(host,reverse("core:payment-failed")),
            
-
      
         }
 
         paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
         cart_total_amount = 0
+    
         if 'cart_data_obj' in request.session:
             for p_id ,item in request.session['cart_data_obj'].items():
                 cart_total_amount += int(item['qty']) * float(item['price'])
 
             #  return render(request, 'core/checkout.html')
+        
         return render(request, 'core/checkout.html', {
                     "cart_data": request.session['cart_data_obj'],
                     'totalcartitems': len(request.session['cart_data_obj']),
@@ -489,6 +488,33 @@ def remove_wishlist(request):
     except wishlist_model.DoesNotExist:
         return JsonResponse({"error": "Product not found in wishlist"}, status=404)
 
+@login_required
+def dashboard(request):
+    orders = CartOrder.objects.filter(user=request.user).order_by('-id')
+    context = {
+        'orders':orders
+    }
+    return render(request, "core/dashboard.html",context)
+
+def order_detail(request,id):
+    # order = CartOrder.objects.filter(user=request.user,id=id)
+    # orderItems = CartOrderItems.objects.filter(order=order)
+
+    context = {
+        'orderItems':id
+    }
+
+    return render (request, 'core/order-detail.html',context)
+@csrf_exempt
+def invoice_view(request):
+    context = {
+        'tran_id':request.POST['tran_id'],
+        'amount':request.POST['amount'],
+        'date':request.POST['tran_date'],
+        'method':request.POST['card_type']
+    }
+    
+    return render(request, 'core/invoice.html', context )
 
         
 

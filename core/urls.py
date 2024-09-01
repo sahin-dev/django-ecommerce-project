@@ -1,25 +1,15 @@
-<<<<<<< HEAD
-from django.urls import path
-from core.views import index,payment
-=======
 from django.urls import path,include
-from core.views import index, product_list_view, category_list_view,category_product_list_view,vendor_list_view,vendor_detail_view,product_detail_view,tag_list,ajax_add_review,search_view,filter_product,add_to_cart,cart_view,delete_item_from_cart,update_cart,checkout_view,payment_failed_view,payment_completed_view,add_to_wishlist,wishlist_view,remove_wishlist
+from core.views import index,payment,dashboard,order_detail, product_list_view,invoice_view, category_list_view,category_product_list_view,vendor_list_view,vendor_detail_view,product_detail_view,tag_list,ajax_add_review,search_view,filter_product,add_to_cart,cart_view,delete_item_from_cart,update_cart,checkout_view,payment_failed_view,payment_completed_view,add_to_wishlist,wishlist_view,remove_wishlist
 # from bkash.bkash import Bkash
->>>>>>> refs/remotes/origin/master
 
 app_name = "core"
 
 urlpatterns = [
-<<<<<<< HEAD
-    path("", index,name="index"),
-    path("payment/", payment,name='payment')
-=======
     #homepage
     path("", index, name='index'),
+  
     path("products/", product_list_view, name = "product-list"),
     path("product/<pid>/", product_detail_view, name = "product-detail"),
-
-    
     
     #Category
     path("category/", category_list_view, name = "category-list"),
@@ -54,14 +44,17 @@ urlpatterns = [
 
     #checkout URL
     path("checkout/", checkout_view, name = "checkout"),
+    #invoice URL
+    path('invoice/', invoice_view,name='invoice' ),
 
     #path Paypal
     path('paypal/', include("paypal.standard.ipn.urls")),
-
+    
+    path("payment/", payment,name='payment'),
     #Bkash
 
     # path('bkash/', include('bkash.urls')),
-    path('bkash/', include('bkash.urls')),
+    # path('bkash/', include('bkash.urls')),
 
 
     # url(r'^bKash_payment/', include('bKash_payment.urls')),
@@ -84,8 +77,8 @@ urlpatterns = [
     #del wishlist
     path('remove-from-wishlist/',remove_wishlist, name = "remove-from-wishlist" ),
 
- 
+    # dashboard
+    path("dashboard/",dashboard,name='dashboard' ),
+    path("dashboard/order/<int:id>",order_detail,name='order-detail')
     
-    
->>>>>>> refs/remotes/origin/master
 ]
