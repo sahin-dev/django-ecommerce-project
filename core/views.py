@@ -362,6 +362,17 @@ def update_cart(request):
     
 @login_required
 def checkout_view(request):
+
+        cart_total_amount = 0
+    
+        if 'cart_data_obj' in request.session:
+            for p_id ,item in request.session['cart_data_obj'].items():
+                cart_total_amount += int(item['qty']) * float(item['price'])
+
+        order = CartOrder.objects.create(
+            user = request.user,
+            price = cart_total_amount,
+        )
         
         host = request.get_host()
         paypal_dict = {
@@ -378,11 +389,20 @@ def checkout_view(request):
         }
 
         paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
-        cart_total_amount = 0
+        
     
         if 'cart_data_obj' in request.session:
             for p_id ,item in request.session['cart_data_obj'].items():
-                cart_total_amount += int(item['qty']) * float(item['price'])
+                cart_order_poducts = CartOrderItems.objects.create(
+                    order = order,
+                    invoice_no= "INVOICE_NO-"+str(order.id),
+                    item = item['title'],
+                    image = item['image'],
+                    qty = item['qty'],
+                    price=item['price'],
+                    total = float(item['qty']) * float(item['price'])
+
+                )
 
             #  return render(request, 'core/checkout.html')
         
